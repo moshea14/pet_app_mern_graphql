@@ -3,6 +3,7 @@ import { useStore } from './store';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ProtectRoute from './components/ProtectRoute';
 
 import AuthForm from './pages/AuthForm';
 import Dashboard from './pages/Dashboard';
@@ -27,13 +28,33 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
 
-          <Route path="/register" element={<AuthForm isLogin={false} />} />
-          <Route path="/login" element={<AuthForm isLogin={true} />} />
+          <Route path="/register" element={(
+            <ProtectRoute>
+              <AuthForm isLogin={false} />
+            </ProtectRoute>
+          )} />
+          <Route path="/login" element={(
+            <ProtectRoute>
+              <AuthForm isLogin={true} />
+            </ProtectRoute>
+          )} />
 
-          <Route path="/pet" element={<PetForm />} />
-          <Route path="/post" element={<PostForm />} />
+          <Route path="/pet" element={(
+            <ProtectRoute>
+              <PetForm />
+            </ProtectRoute>
+          )} />
+          <Route path="/post" element={(
+            <ProtectRoute>
+              <PostForm />
+            </ProtectRoute>
+          )} />
 
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={(
+            <ProtectRoute>
+              <Dashboard />
+            </ProtectRoute>
+          )} />
         </Routes>
       </main>
 

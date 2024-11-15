@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { Types } from 'mongoose';
+import { GraphQLError } from 'graphql';
 
 dotenv.config();
 
@@ -56,7 +57,9 @@ const auth_resolvers = {
           user: user
         };
       } catch (error: any) {
-        return errorHandler(error);
+        const errorMessage = errorHandler(error);
+
+        throw new GraphQLError(errorMessage);
       }
     },
 
