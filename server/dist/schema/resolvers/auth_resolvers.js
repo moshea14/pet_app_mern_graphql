@@ -76,7 +76,7 @@ const auth_resolvers = {
         logoutUser(_, __, context) {
             context.res.clearCookie('pet_token');
             return {
-                user: null
+                message: 'Logged out successfully!'
             };
         }
     }
