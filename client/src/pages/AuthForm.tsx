@@ -1,19 +1,9 @@
 import { Button, Container, Form, Nav } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import {gql, useMutation} from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useState } from 'react';
 
-const REGISTER_USER = gql`
-  mutation RegisterUser($username: String, $email: String, $password: String) {
-    registerUser(username: $username, email: $email, password: $password) {
-      errors
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
+import { REGISTER_USER } from '../graphql/mutations';
 
 function AuthForm({isLogin}: {isLogin: boolean}) {
   const [formData, setFormData] = useState({

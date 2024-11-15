@@ -1,5 +1,5 @@
 import {Routes, Route} from 'react-router-dom';
-// import { useState } from 'react'
+import { useStore } from './store';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,9 +11,16 @@ import PetForm from './pages/PetForm';
 import PostForm from './pages/PostForm';
 
 function App() {
+  const {state} = useStore()!;
 
   return (
     <>
+      {state.loading && (
+        <div className="loading-overlay d-flex justify-content-center align-items-center">
+          <h2 className="fw-light">Loading...</h2>
+        </div>
+      )}
+
       <Header />
 
       <main className="flex-fill">
