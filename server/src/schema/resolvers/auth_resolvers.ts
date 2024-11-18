@@ -5,9 +5,9 @@ import { GraphQLError } from 'graphql';
 
 dotenv.config();
 
-import { User as UserInterface } from '../../interfaces/User.js';
-import User from '../../models/User.js';
+import UserInterface from '../../interfaces/User';
 import Context from '../../interfaces/Context';
+import User from '../../models/User.js';
 
 import { errorHandler } from '../helpers/index.js';
 
@@ -70,17 +70,13 @@ const auth_resolvers = {
       });
 
       if (!user) {
-        return {
-          errors: ['No user found with that email address']
-        }
+        throw new GraphQLError('No user found with that email address');
       }
 
       const valid_pass = await user.validatePassword(args.password);
 
       if (!valid_pass) {
-        return {
-          errors: ['Password is incorrect']
-        }
+        throw new GraphQLError('Password is incorrect');
       }
 
       const token = createToken(user._id!);

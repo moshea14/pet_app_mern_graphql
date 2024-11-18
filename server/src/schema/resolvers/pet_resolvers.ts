@@ -2,7 +2,7 @@ import { Types } from 'mongoose';
 
 import Pet from '../../models/Pet.js';
 import Post from '../../models/Post.js';
-import Context from '../../interfaces/Context';
+import Context from '../../interfaces/Context.js';
 
 import { errorHandler } from '../helpers/index.js';
 
