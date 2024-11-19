@@ -45,8 +45,8 @@ const auth_resolvers = {
     async registerUser(_: any, args: { username: string; email: string; password: string; }, context: Context) {
       try {
         const user = await User.create(args);
-
         const token = createToken(user._id);
+
         context.res.cookie('pet_token', token, {
           httpOnly: true,
           secure: process.env.PORT ? true : false,

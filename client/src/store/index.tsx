@@ -29,8 +29,6 @@ export function StoreProvider(props: StoreProviderProps) {
   const {data, loading} = useQuery(GET_USER);
 
   useEffect(() => {
-
-    console.log(data);
     
     if (!loading) {
       setState({

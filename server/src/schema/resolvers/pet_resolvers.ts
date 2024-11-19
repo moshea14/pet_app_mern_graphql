@@ -5,6 +5,7 @@ import Post from '../../models/Post.js';
 import Context from '../../interfaces/Context.js';
 
 import { errorHandler } from '../helpers/index.js';
+import { GraphQLError } from 'graphql';
 
 
 type PetArguments = {
@@ -24,12 +25,14 @@ const pet_resolvers = {
     // Get all posts
     async getAllPosts() {
       const posts = await Post.find().populate('pet');
+      console.log('all');
 
       return posts;
     },
 
     // Get user pets
     async getUserPets(_: any, __: any, context: Context) {
+      console.log('user pets');
       if (!context.req.user) {
         return {
           errors: ['You are not authorized to perform this action']
@@ -48,7 +51,7 @@ const pet_resolvers = {
       const posts = await Post.find({
         pet: args.pet_id
       });
-
+      
       return posts;
     }
   },
@@ -102,8 +105,8 @@ const pet_resolvers = {
         return {
           message: 'Post created successfully!'
         }
-      } catch (error) {
-        return errorHandler(error);
+      } catch (error: any) {
+        throw new GraphQLError(error.message);
       }
     }
   }

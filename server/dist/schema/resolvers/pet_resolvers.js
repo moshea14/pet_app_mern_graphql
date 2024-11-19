@@ -1,15 +1,18 @@
 import Pet from '../../models/Pet.js';
 import Post from '../../models/Post.js';
 import { errorHandler } from '../helpers/index.js';
+import { GraphQLError } from 'graphql';
 const pet_resolvers = {
     Query: {
         // Get all posts
         async getAllPosts() {
             const posts = await Post.find().populate('pet');
+            console.log('all');
             return posts;
         },
         // Get user pets
         async getUserPets(_, __, context) {
+            console.log('user pets');
             if (!context.req.user) {
                 return {
                     errors: ['You are not authorized to perform this action']
@@ -70,7 +73,7 @@ const pet_resolvers = {
                 };
             }
             catch (error) {
-                return errorHandler(error);
+                throw new GraphQLError(error.message);
             }
         }
     }

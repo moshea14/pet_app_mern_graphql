@@ -24,3 +24,13 @@ export const GET_USER_PETS = gql`
     }
   }
 `;
+
+export const GET_POSTS_FOR_PET = gql`
+  query GetPostsForPet($petId: ID) {
+    getPostsForPet(pet_id: $petId) {
+      _id
+      body
+      title
+    }
+  }
+`;
