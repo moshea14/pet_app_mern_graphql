@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button, Form, Modal, Alert } from 'react-bootstrap';
 import { useMutation } from '@apollo/client';
 
 import { CREATE_POST } from '../../../graphql/mutations';
@@ -33,7 +33,10 @@ function CreatePostModal({
     }]
   });
 
-  const handleModalClose = () => setShowCreatePostModal(false);
+  const handleModalClose = () => {
+    setFormData({...initialFormData});
+    setShowCreatePostModal(false);
+  };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -55,7 +58,6 @@ function CreatePostModal({
 
       handleModalClose();
     } catch (error: any) {
-
       setFormData({
         ...formData,
         errorMessage: error.message
@@ -68,7 +70,10 @@ function CreatePostModal({
       <Modal.Header closeButton>
         <Modal.Title>Create post for {selectedPet?.name}</Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
+        {formData.errorMessage && <Alert variant="danger">{formData.errorMessage}</Alert>}
+
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Title</Form.Label>
