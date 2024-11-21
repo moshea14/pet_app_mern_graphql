@@ -51,7 +51,8 @@ const pet_resolvers = {
                 };
             }
             catch (error) {
-                return errorHandler(error);
+                const errorMessage = errorHandler(error);
+                throw new GraphQLError(errorMessage);
             }
         },
         // Create a post for a pet
@@ -73,7 +74,8 @@ const pet_resolvers = {
                 };
             }
             catch (error) {
-                throw new GraphQLError(error.message);
+                const errorMessage = errorHandler(error);
+                throw new GraphQLError(errorMessage);
             }
         }
     }

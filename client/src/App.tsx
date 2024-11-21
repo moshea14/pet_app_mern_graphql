@@ -9,7 +9,6 @@ import AuthForm from './pages/AuthForm';
 import Dashboard from './pages/Dashboard/index';
 import Landing from './pages/Landing';
 import PetForm from './pages/PetForm';
-import PostForm from './pages/PostForm';
 
 function App() {
   const {state} = useStore()!;
@@ -42,11 +41,6 @@ function App() {
           <Route path="/pet" element={(
             <ProtectRoute>
               <PetForm />
-            </ProtectRoute>
-          )} />
-          <Route path="/post" element={(
-            <ProtectRoute>
-              <PostForm />
             </ProtectRoute>
           )} />
 

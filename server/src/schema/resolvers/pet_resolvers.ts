@@ -80,7 +80,9 @@ const pet_resolvers = {
         }
 
       } catch (error) {
-        return errorHandler(error);
+        const errorMessage = errorHandler(error);
+
+        throw new GraphQLError(errorMessage);
       }
     },
 
@@ -106,7 +108,9 @@ const pet_resolvers = {
           message: 'Post created successfully!'
         }
       } catch (error: any) {
-        throw new GraphQLError(error.message);
+        const errorMessage = errorHandler(error);
+
+        throw new GraphQLError(errorMessage);
       }
     }
   }
